@@ -6,7 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
@@ -57,9 +60,9 @@ public final class QueryUtils {
 
                 String magnitude = properties.optString("mag");
                 String location = properties.optString("place");
-                String time = properties.optString("time");
+                long timeInMilliseconds = properties.getLong("time");
 
-                earthquakes.add(new Earthquake(magnitude, location, time));
+                earthquakes.add(new Earthquake(magnitude, location, timeInMilliseconds));
             }
 
         } catch (JSONException e) {
